@@ -1,0 +1,102 @@
+public interface Lamp
+{
+    string Type { get; set; }
+    string Manufacturer { get; set; }
+    int Luminosity { get; set; }
+    string LightElementsType { get; set; }
+    int LightElementsCount { get; set; }
+
+    void PrintDetails();
+    void ChangePower(int newLuminosity);
+}
+
+
+public interface Camera
+{
+    string Type { get; set; }
+    string Manufacturer { get; set; }
+    int OpticalSensitivity { get; set; }
+
+    void PrintDetails();
+    void ChangeSensitivity(int newOpticalSensitivity);
+}
+
+
+public class PhotoStudio : Lamp, Camera
+{
+    // Lamp properties
+    public string Type { get; set; }
+    public string Manufacturer { get; set; }
+    public int Luminosity { get; set; }
+    public string LightElementsType { get; set; }
+    public int LightElementsCount { get; set; }
+
+    // Camera properties
+    public int OpticalSensitivity { get; set; }
+
+    // Lamp methods
+    public void PrintDetails()
+    {
+        Console.WriteLine($"Lamp Details:");
+        Console.WriteLine($"Type: {Type}");
+        Console.WriteLine($"Manufacturer: {Manufacturer}");
+        Console.WriteLine($"Luminosity: {Luminosity} lumens");
+        Console.WriteLine($"Light Elements Type: {LightElementsType}");
+        Console.WriteLine($"Light Elements Count: {LightElementsCount}");
+    }
+
+    public void ChangePower(int newLuminosity)
+    {
+        Luminosity = newLuminosity;
+        Console.WriteLine($"Luminosity changed to: {Luminosity} lumens");
+    }
+
+    // Camera methods
+    public void ChangeSensitivity(int newOpticalSensitivity)
+    {
+        OpticalSensitivity = newOpticalSensitivity;
+        Console.WriteLine($"Optical Sensitivity changed to: {OpticalSensitivity}");
+    }
+}
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Створення екземплярів класу PhotoStudio
+        PhotoStudio studio1 = new PhotoStudio()
+        {
+            Type = "Studio Lamp",
+            Manufacturer = "LightCo",
+            Luminosity = 5000,
+            LightElementsType = "LED",
+            LightElementsCount = 4,
+            OpticalSensitivity = 800
+        };
+
+        PhotoStudio studio2 = new PhotoStudio()
+        {
+            Type = "Professional Camera",
+            Manufacturer = "CamTech",
+            OpticalSensitivity = 1600
+        };
+
+        // Виведення характеристик фото та світлового обладнання
+        Console.WriteLine("Studio 1:");
+        studio1.PrintDetails();
+        Console.WriteLine();
+
+        Console.WriteLine("Studio 2:");
+        studio2.PrintDetails();
+        Console.WriteLine();
+
+        // Зміна значення світлочутливості одного об'єкту
+        studio2.ChangeSensitivity(2000);
+        Console.WriteLine();
+
+        // Виведення оновлених характеристик
+        Console.WriteLine("Updated details of Studio 2:");
+        studio2.PrintDetails();
+    }
+}
